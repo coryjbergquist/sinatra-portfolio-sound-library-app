@@ -1,0 +1,49 @@
+#NOTES
+
+App for tracking sounds and song ideas for creating music.
+
+GENERAL
+
+1. There are users, and sounds.
+  -a user has_many sounds
+  -a sound belongs_to a user
+2. Users have a username, password.
+3. Sounds have a name, and description
+4. Users can CRUD sounds (only sounds that belong to them)
+
+----------------------------------------------------------------------------
+---possibly add Song class that belongs_to user and has_many sounds.--------
+----sounds would belongs_to Song and User  ---------------------------------
+----------------------------------------------------------------------------
+
+VIEWS
+
+5. Index
+  -if NOT logged in: has login and signup form
+  -if logged in: shows names of all songs and sounds
+      -with links to individual sounds
+    -shows link to add new song
+    -does not show login/signup if user is logged in
+6. Show sound
+  -shows individual sound name, description (and file, if available)
+  -has link to edit and button to delete
+7. Sound edit
+  -shows edit form
+  -options to change sound name, description (and file, if available)
+8. Add new song
+  -form to add new song with name, description (and file, if available)
+
+MODELS
+
+9. User - has_many :songs
+      -has secure password (brypt)
+10. Song - belongs_to :user
+      -can slugify song names
+
+CONTROLLERS
+
+11. ApplicationController
+12. UsersController
+    -create new user, can view main page of sounds
+13. SoundsController
+    -CRUD sounds
