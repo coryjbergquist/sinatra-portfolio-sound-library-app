@@ -25,6 +25,7 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect "users/sounds"
     else
+      flash[:message] = "That user does not exist, please signup for a new account."
       redirect "/"
     end
   end

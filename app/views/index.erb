@@ -1,6 +1,9 @@
 <h1>Welcome to the Sounds and Songs Organizer!</h1>
 <h3>Keep track of all of your song ideas, anywhere from simple sounds that you'd like to use in a song, to entire song structures.</h3>
 
+<p><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
 
 <h4>If you do not have an account, please sign up:</h4>
   <form action="/signup" method="post">

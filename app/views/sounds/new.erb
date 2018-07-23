@@ -1,3 +1,6 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h4>Add sound:</h4>
 <form action="/sounds" method="POST">
   <label for="name">New Sound Name: </label>
