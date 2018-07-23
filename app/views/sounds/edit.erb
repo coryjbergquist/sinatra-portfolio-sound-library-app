@@ -1,0 +1,16 @@
+<h1>Edit your your sound called <%=@sound.name%></h1>
+
+<form action="/sounds/<%=@sound.slug%>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <label for="name">Sound Name</label>
+  <input type="text" name="name" id="name">
+  <label for="description">Sound Description</label>
+  <input type="text" name="description" id="description">
+  <input type="submit" value="Edit Sound">
+</form><br>
+
+<h3>Delete your sound by clicking the "Delete" button.</h3><br>
+<form action="/sounds/<%=@sound.slug%>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">
+</form>

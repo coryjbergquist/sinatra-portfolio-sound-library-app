@@ -9,7 +9,12 @@ class ApplicationController < Sinatra::Base
 
 
   get "/" do
-    erb :index
+    if is_logged_in?(session)
+      @user = User.find(session[:id])
+      redirect "/users/sounds"
+    else
+      erb :index
+    end
   end
 
   helpers do

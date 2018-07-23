@@ -3,11 +3,17 @@
 
   <a href="/sounds/new">Add New Sound</a><br>
   <h3>Current Sounds</h3>
+
   <%@user.sounds.each do |sound|%>
-    <%=sound.name%>
-    <%="sound link"%>
+    <%slug = sound.slug%>
+    <a href="/sounds/<%=slug%>"><%=Sound.find_by_slug(slug).name%></a><br>
 <%else%>
 
 <%end%>
 
 <%end%><br>
+
+<p>Click "Logout" to logout.</>
+  <form action="/logout" method="post">
+    <input type="submit" value="Logout">
+  </form>
