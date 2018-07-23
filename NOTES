@@ -47,3 +47,7 @@ CONTROLLERS
     -create new user, can view main page of sounds
 13. SoundsController
     -CRUD sounds
+
+DATABASE
+
+14. keeps database of users and sounds

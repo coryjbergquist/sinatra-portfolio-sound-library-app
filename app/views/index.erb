@@ -1,1 +1,21 @@
-Hello World!
+<h1>Welcome to the Sounds and Songs Organizer!</h1>
+<h3>Keep track of all of your song ideas, anywhere from simple sounds that you'd like to use in a song, to entire song structures.</h3>
+
+
+<h4>If you do not have an account, please sign up:</h4>
+  <form action="/signup" method="post">
+    <label for="username">New User: </label>
+    <input type="text" name="username" id="username" placeholder="new username">
+    <label for="new_password">Password: </label>
+    <input type="text" name="password" id="password">
+    <input type="submit" value="Sign Up">
+  </form>
+
+<h4>If you already have an account, please login:</h4>
+  <form action="/login" method="post">
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username" placeholder="username">
+    <label for="new_password">Password: </label>
+    <input type="text" name="password" id="password">
+    <input type="submit" value="Login">
+  </form>
