@@ -6,8 +6,16 @@ class UsersController < ApplicationController
 
   post "/signup" do
     @user = User.create(params)
-    session[:id] = @user.id
-    redirect :"users/sounds"
+    if !@user.errors.any?
+      session[:id] = @user.id
+      redirect :"users/sounds"
+    else
+      errors = @user.errors.map do |attribute, message|
+        "#{attribute} #{message}"
+      end
+      flash[:message] = errors
+      redirect "/login"
+    end
   end
 
   get "/users/sounds" do

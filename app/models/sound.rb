@@ -1,6 +1,7 @@
 
 class Sound < ActiveRecord::Base
   belongs_to :user
+  validates_presence_of :name, :description, :filename
 
   def slug
     @slug = self.name.strip.gsub(' ', '-').gsub(/[^\w-]/, '')

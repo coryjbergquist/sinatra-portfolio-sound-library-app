@@ -1,7 +1,9 @@
 <div class="row">
 <h2>Here is your sound: </h2>
 </div>
-
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h3>Sound Name: <%=@sound.name%></h3>
 <h4>Sound Description: <%=@sound.description%></h4><br>
 <audio controls>
