@@ -12,6 +12,7 @@ class SoundsController < ApplicationController
     if @user.sounds.include?(@sound)
       erb :"sounds/edit"
     else
+      flash[:message] = "You do not have a sound by that name."
       redirect "/users/sounds"
     end
   end
