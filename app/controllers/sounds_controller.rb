@@ -80,8 +80,8 @@ class SoundsController < ApplicationController
   get "/sounds/:slug" do
     @user = User.find(session[:id])
     @sound = @user.sounds.find_by_slug(params[:slug])
-    @filename = @sound.filename
     if @user.sounds.include?(@sound)
+      @filename = @sound.filename
       erb :"/sounds/view"
     else
       flash[:message] = "You do not have a sound with that title, would you like to create one?"
