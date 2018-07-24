@@ -53,7 +53,7 @@ class SoundsController < ApplicationController
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-      if params[:name].index( /[^[:alnum:]]/ )
+      if params[:name].index( /[^\s[:alnum:]]/ )
         flash[:message] = "You can't use special characters, you'll break everything!"
         redirect "/sounds/new"
       else
