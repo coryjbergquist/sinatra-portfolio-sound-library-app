@@ -35,7 +35,15 @@ class SoundsController < ApplicationController
       flash[:message] = "That sound name already exists, choose a different name."
       redirect "/sounds/new"
     else
-      @sound = Sound.create(params)
+binding.pry
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+
+      File.open("./public/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+
+      @sound = Sound.create(name: params[:name], description: params[:description])
       @user = User.find(session[:id])
       @sound.user = @user
       @sound.save
