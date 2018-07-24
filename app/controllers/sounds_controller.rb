@@ -64,7 +64,6 @@ class SoundsController < ApplicationController
           @user = User.find(session[:id])
           @sound.user = @user
           @sound.save
-          binding.pry
           redirect "/sounds/#{@sound.slug}"
         else
           errors = @sound.errors.map do |attribute, message|
