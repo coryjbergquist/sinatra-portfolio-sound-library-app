@@ -1,3 +1,4 @@
+
 class SoundsController < ApplicationController
   use Rack::Flash
 
@@ -24,8 +25,15 @@ class SoundsController < ApplicationController
 
   delete "/sounds/:slug" do
     @sound = Sound.find_by_slug(params[:slug])
-    @sound.destroy
-    redirect "/users/sounds"
+    filename = @sound.filename
+    if File.exist?("public/#{filename}")
+      File.delete("public/#{filename}")
+      @sound.destroy
+      redirect "/users/sounds"
+    else
+      @sound.destroy
+      redirect "/users/sounds"
+    end
   end
 
 
@@ -35,15 +43,13 @@ class SoundsController < ApplicationController
       flash[:message] = "That sound name already exists, choose a different name."
       redirect "/sounds/new"
     else
-binding.pry
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
-
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
 
-      @sound = Sound.create(name: params[:name], description: params[:description])
+      @sound = Sound.create(name: params[:name], description: params[:description], filename: @filename)
       @user = User.find(session[:id])
       @sound.user = @user
       @sound.save
@@ -53,6 +59,7 @@ binding.pry
 
   get "/sounds/:slug" do
     @sound = Sound.find_by_slug(params[:slug])
+    @filename = @sound.filename
     @user = User.find(session[:id])
     if @user.sounds.include?(@sound)
       erb :"/sounds/view"
