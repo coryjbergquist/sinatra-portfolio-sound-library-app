@@ -1,19 +1,37 @@
 <h1>Hello <%=@user.username%></h1><br>
-<%if self.is_logged_in?(session) && session[:id] == self.current_user(session).id%>
+<div class="row">
+  <%if self.is_logged_in?(session) && session[:id] == self.current_user(session).id%>
 
-  <a href="/sounds/new">Add New Sound</a><br>
-  <h3>Current Sounds</h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a href="/sounds/new">Add New Sound</a></a></li>
+      </ol>
+    </nav>
 
-  <%@user.sounds.each do |sound|%>
-    <%slug = sound.slug%>
-    <a href="/sounds/<%=slug%>"><%=Sound.find_by_slug(slug).name%></a><br>
-<%else%>
+    </div>
+      <h3>Current Sounds</h3>
+      <div class="row">
+        <div class="col-sm-4">
+      <%@user.sounds.each do |sound|%>
+        <%slug = sound.slug%>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a href="/sounds/<%=slug%>"><%=Sound.find_by_slug(slug).name%></a></li>
+        </ol>
+      </nav>
 
-<%end%>
 
-<%end%><br>
+      <%else%>
 
-<p>Click "Logout" to logout.</>
+      <%end%>
+
+  <%end%><br>
+        </div>
+      </div>
+
+<div class="row">
+  <p>Click "Logout" to logout.</p><br>
   <form action="/logout" method="post">
     <input type="submit" value="Logout">
   </form>
+</div>

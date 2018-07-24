@@ -1,5 +1,8 @@
-<h1>Here is your sound named: <%=@sound.name%></h1>
+<div class="row">
+<h2>Here is your sound: </h2>
+</div>
 
-<h2><%=@sound.name%></h2>
-<h3><%=@sound.description%></h3><br>
-<p><a href="/sounds/<%=@sound.slug%>/edit">Edit Sound</a></p>
+<h3>Sound Name: <%=@sound.name%></h3>
+<h4>Sound Description: <%=@sound.description%></h4><br>
+<p><a href="/sounds/<%=@sound.slug%>/edit">Edit Sound</a></p><br>
+  <a href="/sounds/new">Add New Sound</a><br>
