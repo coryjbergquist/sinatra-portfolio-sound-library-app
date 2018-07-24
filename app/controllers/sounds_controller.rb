@@ -53,18 +53,23 @@ class SoundsController < ApplicationController
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-      @sound = Sound.create(name: params[:name], description: params[:description], filename: @filename)
-      if !@sound.errors.any?
-        @user = User.find(session[:id])
-        @sound.user = @user
-        @sound.save
-        redirect "/sounds/#{@sound.slug}"
+      if params[:name].index( /[^[:alnum:]]/ )
+        flash[:message] = "You can't use special characters, you'll break everything!"
+        redirect "/sounds/new"
       else
-        errors = @sound.errors.map do |attribute, message|
-                  "#{attribute} #{message}"
-                  end
-          flash[:message] = errors
-          redirect "/sounds/new"
+        @sound = Sound.create(name: params[:name], description: params[:description], filename: @filename)
+        if !@sound.errors.any?
+          @user = User.find(session[:id])
+          @sound.user = @user
+          @sound.save
+          redirect "/sounds/#{@sound.slug}"
+        else
+          errors = @sound.errors.map do |attribute, message|
+                    "#{attribute} #{message}"
+                    end
+            flash[:message] = errors
+            redirect "/sounds/new"
+        end
       end
     end
   end

@@ -9,9 +9,9 @@ Specs:
 - [x] Include user accounts - users have name and password
 - [x] Ensure that users can't modify content created by other users - only users that are logged into the correct session id can access the sound edit page.
 - [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying - All CRUD routes are present.
-- [x] Include user input validations - flash messages for CRUD actions, and if invalid input is made
-- [x] Display validation failures to user with error message (example form URL e.g. /posts/new) - flash messages are present
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Include user input validations - validators for user and sound models
+- [x] Display validation failures to user with error message (example form URL e.g. /posts/new) - flash messages show validation errors
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits - several commits were made during the coding process
