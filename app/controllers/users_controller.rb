@@ -5,16 +5,22 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    @user = User.create(params)
-    if !@user.errors.any?
-      session[:id] = @user.id
-      redirect :"users/sounds"
-    else
-      errors = @user.errors.map do |attribute, message|
-        "#{attribute} #{message}"
-      end
-      flash[:message] = errors
+    @username = User.find_by(username: params[:username])
+  if @username
+      flash[:message] = "A user by that name already exists"
       redirect "/login"
+    else
+      @user = User.create(params)
+      if !@user.errors.any?
+        session[:id] = @user.id
+        redirect :"users/sounds"
+      else
+        errors = @user.errors.map do |attribute, message|
+          "#{attribute} #{message}"
+        end
+        flash[:message] = errors
+        redirect "/login"
+      end
     end
   end
 
