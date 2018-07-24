@@ -44,7 +44,8 @@ class SoundsController < ApplicationController
     flash[:message] = "Please add a file to upload"
     redirect "/sounds/new"
   else
-    @sound = Sound.find_by(name: params[:name])
+    @user = User.find(session[:id])
+    @sound = @user.sounds.find_by(name: params[:name])
     if @sound
       flash[:message] = "That sound name already exists, choose a different name."
       redirect "/sounds/new"
@@ -63,6 +64,7 @@ class SoundsController < ApplicationController
           @user = User.find(session[:id])
           @sound.user = @user
           @sound.save
+          binding.pry
           redirect "/sounds/#{@sound.slug}"
         else
           errors = @sound.errors.map do |attribute, message|
@@ -77,9 +79,9 @@ class SoundsController < ApplicationController
   end
 
   get "/sounds/:slug" do
-    @sound = Sound.find_by_slug(params[:slug])
-    @filename = @sound.filename
     @user = User.find(session[:id])
+    @sound = @user.sounds.find_by_slug(params[:slug])
+    @filename = @sound.filename
     if @user.sounds.include?(@sound)
       erb :"/sounds/view"
     else
