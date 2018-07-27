@@ -40,41 +40,20 @@ class SoundsController < ApplicationController
 
 
   post "/sounds" do
-  if !params.include?("file")
-    flash[:message] = "Please add a file to upload"
-    redirect "/sounds/new"
-  else
-    @user = User.find(session[:id])
-    @sound = @user.sounds.find_by(name: params[:name])
-    if @sound
-      flash[:message] = "That sound name already exists, choose a different name."
+    if !params.include?("file")
+      flash[:message] = "Please add a file to upload"
       redirect "/sounds/new"
-    else
-      @filename = params[:file][:filename]
-      file = params[:file][:tempfile]
-      File.open("./public/#{@filename}", 'wb') do |f|
-        f.write(file.read)
-      end
-      if params[:name].index( /[^\s[:alnum:]]/ )
-        flash[:message] = "You can't use special characters, you'll break everything!"
-        redirect "/sounds/new"
-      else
-        @sound = Sound.create(name: params[:name], description: params[:description], filename: @filename)
-        if !@sound.errors.any?
-          @user = User.find(session[:id])
-          @sound.user = @user
-          @sound.save
-          redirect "/sounds/#{@sound.slug}"
-        else
-          errors = @sound.errors.map do |attribute, message|
-                    "#{attribute} #{message}"
-                    end
-            flash[:message] = errors
-            redirect "/sounds/new"
-        end
-      end
     end
-  end
+    @user = User.find(session[:id])
+    @sound = @user.sounds.create(name: params[:name], description: params[:description], filename: params[:file][:filename])
+    if !@sound.errors.any?
+      @sound.file = params[:file]
+      redirect "/sounds/#{@sound.slug}"
+    else
+      errors = @sound.errors.full_messages
+      flash[:message] = errors.join("\n")
+      redirect "/sounds/new"
+    end
   end
 
   get "/sounds/:slug" do

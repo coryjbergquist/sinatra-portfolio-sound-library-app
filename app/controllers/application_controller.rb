@@ -26,6 +26,9 @@ class ApplicationController < Sinatra::Base
     def is_logged_in?(arg)
       !!arg[:id]
     end
+
+
+
   end
 
 

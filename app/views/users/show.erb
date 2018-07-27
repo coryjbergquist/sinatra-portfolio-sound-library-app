@@ -17,18 +17,17 @@
       <h3>Current Sounds</h3>
       <div class="row">
         <div class="col-sm-4">
-      <%@user.sounds.each do |sound|%>
+      <%@sounds.each do |sound|%>
         <%slug = sound.slug%>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><a href="/sounds/<%=slug%>"><%=Sound.find_by_slug(slug).name%></a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a href="/sounds/<%=slug%>"><%=sound.name%></a></li>
         </ol>
       </nav>
-
+      <%end%>
 
       <%else%>
 
-      <%end%>
 
   <%end%><br>
         </div>

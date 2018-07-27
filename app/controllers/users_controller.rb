@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   get "/users/sounds" do
     if self.is_logged_in?(session) && session[:id] == self.current_user(session).id
       @user = User.find(session[:id])
+      @sounds = @user.sounds
       erb :"/users/show"
     else
       redirect "/login"
