@@ -65,8 +65,11 @@ html {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+<<<<<<< HEAD
   margin-top: -20px;
   margin-bottom: -20px;
+=======
+>>>>>>> add_file_upload
   margin-right: -15px;
   margin-left: -15px;
 }
@@ -2049,4 +2052,8 @@ html {
     align-self: stretch !important;
   }
 }
+<<<<<<< HEAD
 /*# sourceMappingURL=bootstrap-grid.css.map */
+=======
+/*# sourceMappingURL=bootstrap-grid.css.map */
+>>>>>>> add_file_upload
