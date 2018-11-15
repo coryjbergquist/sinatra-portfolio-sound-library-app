@@ -1,3 +1,4 @@
+
 class Sound < ActiveRecord::Base
   belongs_to :user
 
@@ -17,6 +18,3 @@ def include_chars?(subject, characters)
 end
 
 end
-
-
-#save Sound id, then slugify, then find by id.
